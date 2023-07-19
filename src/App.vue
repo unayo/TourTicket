@@ -1,0 +1,12 @@
+<template>
+  <Menu></Menu>
+  <RouterView />
+  <el-backtop :right="23" :bottom="23" />
+</template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+</style>
