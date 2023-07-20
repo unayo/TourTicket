@@ -1,5 +1,8 @@
 # Suntravel
 
+## 網址
+https://unayo.github.io/vite-tourism/
+
 ## 環境變數
 
 專案 : Vue3 + tailwindcss 3 + element-plus
@@ -21,12 +24,6 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
 
 ## customer

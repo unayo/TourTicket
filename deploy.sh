@@ -23,7 +23,7 @@ git commit -m 'deploy'
 # if you are deploying to https://unayo.github.io
 # git push -f git@github.com:unayo/unayo.github.io.git main
 
-# if you are deploying to https://unayo.github.io/TourTicket
-git push -f git@github.com:unayo/TourTicket.git main:gh-pages
+# if you are deploying to https://unayo.github.io/vite-tourism
+git push -f git@github.com:unayo/vite-tourism.git main:gh-pages
 
 cd -

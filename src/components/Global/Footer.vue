@@ -7,22 +7,11 @@
         <div class="flex gap-16 flex-wrap">
           <div>
             <p class="text-sm mb-[18px]">{{ $t('Organizer') }}</p>
-            <img src="/images/logo-keelung.png" alt="keelung logo" class="h-[42px]" />
+            <img src="/images/logo.png" alt="keelung logo" class="h-[42px]" />
           </div>
-          <div>
-            <p class="text-sm mb-3">{{ $t('Executor') }}</p>
-            <div class="flex gap-3 mb-8 md:mb-0">
-              <img src="/images/logo-brim.png" alt="brim" class="h-[42px]" />
-              <img src="/images/logo-3t.png" alt="3tgds" class="h-[49px]" />
-            </div>
-          </div>
-        </div>
-        <div class="md:mr-16">
-          <p class="text-sm mb-[18px]">{{ $t('Travel Services Qrcode') }}</p>
-          <img src="/images/qrcode.png" alt="qrcode" class="h-[110px]" />
         </div>
       </div>
-      <div class="text-sm text-left text-gray-400">© 2020 3T GDS Technology Inc.</div>
+      <div class="text-sm text-left text-gray-400">© 2020 BAM Inc.</div>
     </div>
   </div>
 </template>

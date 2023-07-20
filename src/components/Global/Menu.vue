@@ -22,17 +22,17 @@ export default {
         mainTitle: 'Travel Plan',
         link: '#TravelPlan',
         sub: [
-          { title: 'Plan', link: '' },
-          { title: 'Transportation Info', link: '' }
+          { title: 'Plan', link: '#' },
+          { title: 'Transportation Info', link: '#' }
         ]
       },
       {
         mainTitle: 'Travel Experience',
         link: '#TravelExperience',
         sub: [
-          { title: 'Theme Tours', link: '' },
-          { title: 'Guided Walking Tours', link: '' },
-          { title: 'Cruise Passenger Zone', link: '' }
+          { title: 'Theme Tours', link: '#' },
+          { title: 'Guided Walking Tours', link: '#' },
+          { title: 'Cruise Passenger Zone', link: '#' }
         ]
       },
       {
@@ -130,7 +130,7 @@ export default {
     <div class="container mx-auto">
       <el-menu class="items-center py-3" mode="horizontal" :ellipsis="false">
         <a :href="{ path: `/${$route.params.locale}` }">
-          <img src="/images/logo-keelung.png" alt="keelung logo" class="h-[42px]" />
+          <img src="/images/logo.png" alt="keelung logo" class="h-[42px]" />
         </a>
         <div class="flex-grow"></div>
         <!-- ----- web start ----- -->
@@ -182,7 +182,7 @@ export default {
   </div>
   <el-drawer v-model="drawer" :show-close="true" size="83%">
     <template #header>
-      <img src="/images/logo-keelung.png" alt="keelung logo" class="h-[42px] object-contain" />
+      <img src="/images/logo.png" alt="keelung logo" class="h-[42px] object-contain" />
     </template>
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item v-for="(item, index) in menu" :key="index" :name="index">
