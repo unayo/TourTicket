@@ -7,7 +7,7 @@ https://unayo.github.io/vite-tourism/
 
 專案 : Vue3 + tailwindcss 3 + element-plus
 環境 : node v16.14.2
-
+vite-plugin-mock
 ## Project Setup
 
 ```sh

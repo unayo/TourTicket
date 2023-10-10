@@ -11,11 +11,10 @@ import { storeGlobal } from '@/stores/global.js'
 
 import Parallaxy from '@lucien144/vue3-parallaxy'
 
-import { APIservice, TO_3TEZ_WEDSITE } from '@/api/index.js'
 import { CATEID } from '@/utils/prod.js'
 import { reactive, watch } from 'vue'
 
-import { utilsTopstore } from '@/utils/store.js'
+import { utilsTopstore, utilsStoreAll, utilsItemAll } from '@/utils/store.js'
 
 export default {
   components: { MainBanner, Title, Article, TopStore, Stores, Prod, Footer, Parallaxy },
@@ -49,73 +48,36 @@ export default {
       }
     )
 
-    // const randomstore = async () => {
-    //   try {
-    //     const res = await APIservice().getaxios.getMerchant({
-    //       isRandom: true,
-    //       isGetChain: true,
-    //       isGroupCategory: true,
-    //       category: 'Foods,Souvenirs,Tickets,Traffic',
-    //       paginate: 8,
-    //       page: 1
-    //     })
-    //     if (res.succ) {
-    //       storesBtn.random = res.data.data
-    //     }
-    //   } catch (error) {}
-    // }
     const randomstore = (val) => {
       storesBtn.random = utilsTopstore(val)
     }
-    const ckStoreBtn = async (val) => {
-      try {
+
+    const ckStoreBtn = (val) => {
         storesBtn.init = val
-        const res = await APIservice().getaxios.getMerchant({
-          category: val,
-          isGetChain: true,
-          isGroupCategory: false,
-          paginate: 10,
-          page: 1
-        })
-        if (res.succ) {
-          storesBtn.items = res.data.data
-          storesBtn.total_count = res.data.total_page
-        }
-      } catch (error) {}
-    }
-    const handleSizeChange = (val) => {
-      // console.log('size-change', val)
+        storesBtn.items = utilsStoreAll(val)
     }
 
     // ----- Product Tickets ------
+    // 航空旅遊 Airport / 飯店住宿 Hotel / 美食餐券、伴手禮 Others
     const prodBtn = reactive({
-      init: 'Foods',
-      cate: ['Foods', 'Souvenirs', 'Tickets', 'Traffic'],
+      init: 'Airport',
+      cate: ['Airport', 'Hotel', 'Others'],
       newDesc: []
     })
-    const ckProdBtn = async (val) => {
-      try {
+    const ckProdBtn = (val) => {
         prodBtn.init = val
-        const res = await APIservice().getaxios.getItem({
-          page: 1,
-          paginate: 8,
-          sortby: 'new-desc',
-          cata_id: CATEID(val)
-        })
-        if (res.succ) {
-          prodBtn.newDesc = res.data.data
-        }
-      } catch (error) {}
+        prodBtn.newDesc = utilsItemAll()
+        console.log('prodBtn.newDesc', prodBtn.newDesc)
     }
 
     const init = async () => {
       await randomstore()
-      await ckStoreBtn(storesBtn.init)
-      await ckProdBtn(prodBtn.init)
+      await ckStoreBtn()
+      await ckProdBtn()
     }
     init()
 
-    return { storesBtn, ckStoreBtn, prodBtn, ckProdBtn, handleSizeChange, CATEID, TO_3TEZ_WEDSITE }
+    return { storesBtn, ckStoreBtn, prodBtn, ckProdBtn, CATEID }
   }
 }
 </script>
@@ -201,7 +163,7 @@ export default {
         </a>
         </Parallaxy>
         <Parallaxy :speed="20" class="experience relative w-full sm:w-1/3 h-[300px] md:h-[545px]">
-           <a href="" class="experience relative w-full sm:w-1/3 h-[300px] md:h-[545px]">
+          <a href="" class="experience relative w-full sm:w-1/3 h-[300px] md:h-[545px]">
           <div
             class="experience-img saturate-50 h-full w-full bg-image bg-cover bg-center transform transition-transform duration-500 ease-in-out"
             style="
@@ -285,15 +247,8 @@ export default {
               </button>
             </template>
           </div>
-          <Stores :active="storesBtn.items" />
+          <Stores :active="storesBtn.items" :prebtn="storesBtn.init" />
         </div>
-        <!-- <el-pagination
-          class="flex justify-center mb-3"
-          layout="prev, pager, next"
-          :total="storesBtn.totalpage"
-          @size-change="handleSizeChange"
-        >
-        </el-pagination> -->
         <Parallaxy :speed="300" class="hidden md:block">
           <img
             src="@/assets/images/ob5-star.png"
@@ -323,21 +278,17 @@ export default {
             class="rounded-lg tracking-wider text-sm py-1.5 px-8"
             :class="{
               'bg-red-btn text-white hover:bg-red-dark-btn':
-                prodBtn.init === 'Foods' && item === 'Foods',
+                prodBtn.init === 'Airport' && item === 'Airport',
               'bg-blue-btn text-white hover:bg-blue-dark-btn':
-                prodBtn.init === 'Souvenirs' && item === 'Souvenirs',
+                prodBtn.init === 'Hotel' && item === 'Hotel',
               'bg-green-btn text-white hover:bg-green-dark-btn':
-                prodBtn.init === 'Tickets' && item === 'Tickets',
-              'bg-brown-btn text-white hover:bg-brown-dark-btn':
-                prodBtn.init === 'Traffic' && item === 'Traffic',
+                prodBtn.init === 'Others' && item === 'Others',
               'border border-red-btn text-red-btn hover:bg-red-btn hover:text-white':
-                prodBtn.init !== 'Foods' && item === 'Foods',
+                prodBtn.init !== 'Airport' && item === 'Airport',
               'border border-blue-btn text-blue-btn hover:bg-blue-btn hover:text-white':
-                prodBtn.init !== 'Souvenirs' && item === 'Souvenirs',
+                prodBtn.init !== 'Hotel' && item === 'Hotel',
               'border border-green-btn text-green-btn hover:bg-green-btn hover:text-white':
-                prodBtn.init !== 'Tickets' && item === 'Tickets',
-              'border border-brown-btn text-brown-btn hover:bg-brown-btn hover:text-white':
-                prodBtn.init !== 'Traffic' && item === 'Traffic'
+                prodBtn.init !== 'Others' && item === 'Others'
             }"
             @click="ckProdBtn(item)"
           >
@@ -345,15 +296,12 @@ export default {
           </button>
         </template>
       </div>
-      <Prod :active="prodBtn.newDesc" />
-      <div class="flex justify-center">
-        <a
-          :href="`${TO_3TEZ_WEDSITE()}/product/0`"
-          target="_blank"
-          class="rounded-lg tracking-wider text-sm py-1.5 px-8 border border-black text-black hover:bg-black hover:text-white"
-        >
+      <Prod :active="prodBtn.newDesc" :prebtn="prodBtn.init" />
+      <div class="flex justify-center ">
+        <span class="rounded-lg tracking-wider text-sm py-1.5 px-8 border border-black text-black hover:bg-black hover:text-white">
+
           {{ $t('View More Products') }}
-        </a>
+        </span>
       </div>
       <Parallaxy
         :speed="20"

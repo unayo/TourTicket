@@ -22,9 +22,10 @@ export default {
 $stone-700: rgb(68 64 60);
 
 .title {
-  -webkit-text-stroke: 1.5px $stone-700;
-  &::before {
-    content: attr(data-storke);
-  }
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  // -webkit-text-stroke: 1.5px $stone-700;
+  // &::before {
+  //   content: attr(data-storke);
+  // }
 }
 </style>

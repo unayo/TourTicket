@@ -6,6 +6,12 @@ export default {
       default() {
         return []
       }
+    },
+    prebtn: {
+      typeof: String,
+      default() {
+        return 'Foods'
+      }
     }
   },
   setup() {
@@ -17,7 +23,7 @@ export default {
 <template>
   <div class="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-5 gap-0.5 px-1 mt-10">
     <div v-for="(item, index) in active" :key="index">
-      <a :href="item.url" target="_blank" class="stores">
+      <a v-if="prebtn === item.category" :href="item.url" target="_blank" class="stores">
         <div class="relative aspect-[300/178] object-cover overflow-hidden">
           <img
             class="store-img w-full transition-transform duration-300 ease-in-out"

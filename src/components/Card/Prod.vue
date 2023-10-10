@@ -1,6 +1,5 @@
 <script>
 import { useComma } from '@/utils/hooks.js'
-import { TO_3TEZ_WEDSITE } from '@/api/index.js'
 import { useRoute } from 'vue-router'
 export default {
   props: {
@@ -9,13 +8,18 @@ export default {
       default() {
         return []
       }
+    },
+    prebtn: {
+      typeof: String,
+      default() {
+        return 'Airport'
+      }
     }
   },
   setup() {
     const route = useRoute()
     const getParams = route.params.locale
-    const website = TO_3TEZ_WEDSITE()
-    return { useComma, getParams, website, route }
+    return { useComma, getParams, route }
   }
 }
 </script>
@@ -23,11 +27,7 @@ export default {
 <template>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 px-2 my-10">
     <template v-for="(item, index) in active" :key="index">
-      <a
-        :href="`${website}/product/detail/${item.item_id}?lang=${getParams}`"
-        target="_blank"
-        class="top-store pb-10"
-      >
+      <div v-if="prebtn === item.category">
         <div class="relative rounded-lg aspect-[300/178] object-cover overflow-hidden">
           <img
             src="/images/prod/new.png"
@@ -44,7 +44,7 @@ export default {
           TWD {{ useComma(item.min_price) }} {{ $t('up') }}
         </h3>
         <h2 class="font-semibold text-sm">{{ item.name }}</h2>
-      </a>
+      </div>
     </template>
   </div>
 </template>
